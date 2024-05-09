@@ -1,12 +1,14 @@
-FROM --platform=linux/amd64 public.ecr.aws/docker/library/python:3.10-slim-buster as build
+FROM python:3.11-slim
 
-WORKDIR /src
-
-COPY ./requirements.txt requirements.txt
-
-RUN apt update -y && pip install --no-cache-dir -r requirements.txt
+WORKDIR /usr/src/app
 
 COPY . .
 
-CMD python3 app.py
+RUN apt update -y && \
+    pip install --no-cache-dir -r requirements.txt
 
+COPY . .
+
+EXPOSE 5153
+
+CMD [ "python", "./app.py" ]
