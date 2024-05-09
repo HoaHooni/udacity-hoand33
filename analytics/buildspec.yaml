@@ -11,10 +11,10 @@ phases:
       - echo Building Docker image...
       - cd analytics
       - docker build -t hoand33-ecr .
-      - docker tag hoand33-ecr:latest 550762782574.dkr.ecr.us-east-1.amazonaws.com/hoand33-ecr:latest
+      - docker tag hoand33-ecr:latest 550762782574.dkr.ecr.us-east-1.amazonaws.com/hoand33-ecr:CODEBUILD_BUILD_NUMBER
       - echo build Success
   post_build:
     commands:
       - echo Pushing image to ECR...
-      - docker push 550762782574.dkr.ecr.us-east-1.amazonaws.com/hoand33-ecr:latest
+      - docker push 550762782574.dkr.ecr.us-east-1.amazonaws.com/hoand33-ecr:CODEBUILD_BUILD_NUMBER
       - echo push Success
