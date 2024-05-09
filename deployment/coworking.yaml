@@ -7,10 +7,10 @@ spec:
   selector:
     service: coworking
   ports:
-  - name: "5153"
-    protocol: TCP
-    port: 5153
-    targetPort: 5153
+    - name: "5153"
+      protocol: TCP
+      port: 5153
+      targetPort: 5153
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -29,28 +29,28 @@ spec:
         service: coworking
     spec:
       containers:
-      - name: coworking
-        image: 550762782574.dkr.ecr.us-east-1.amazonaws.com/hoand33:$CODEBUILD_BUILD_NUMBER
-        imagePullPolicy: IfNotPresent
-        livenessProbe:
-          httpGet:
-            path: /health_check
-            port: 5153
-          initialDelaySeconds: 5
-          timeoutSeconds: 2
-        readinessProbe:
-          httpGet:
-            path: "/readiness_check"
-            port: 5153
-          initialDelaySeconds: 5
-          timeoutSeconds: 5
-        envFrom:
-        - configMapRef:
-            name: pro-properties
-        env:
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: secret-pro-properties
-              key: DB_PASSWORD
+        - name: coworking
+          image: 550762782574.dkr.ecr.us-east-1.amazonaws.com/hoand33-ecr:$CODEBUILD_BUILD_NUMBER
+          imagePullPolicy: IfNotPresent
+          livenessProbe:
+            httpGet:
+              path: /health_check
+              port: 5153
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+          readinessProbe:
+            httpGet:
+              path: "/readiness_check"
+              port: 5153
+            initialDelaySeconds: 5
+            timeoutSeconds: 5
+          envFrom:
+            - configMapRef:
+                name: pro-properties
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secret-pro-properties
+                  key: DB_PASSWORD
       restartPolicy: Always
