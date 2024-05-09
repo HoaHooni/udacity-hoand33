@@ -28,9 +28,11 @@ spec:
       labels:
         service: coworking
     spec:
+      imagePullSecrets:
+        - name: regcred
       containers:
         - name: coworking
-          image: 550762782574.dkr.ecr.us-east-1.amazonaws.com/hoand33-ecr:$CODEBUILD_BUILD_NUMBER
+          image: 550762782574.dkr.ecr.us-east-1.amazonaws.com/hoand33-ecr:latest
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
