@@ -5,13 +5,16 @@ phases:
     commands:
       - echo Logging in to ECR...
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 550762782574.dkr.ecr.us-east-1.amazonaws.com
+      - echo Logging Success
   build:
     commands:
       - echo Building Docker image...
       - cd analytics
       - docker build -t hoand33-ecr .
       - docker tag hoand33-ecr:latest 550762782574.dkr.ecr.us-east-1.amazonaws.com/hoand33-ecr:latest
+      - echo build Success
   post_build:
     commands:
       - echo Pushing image to ECR...
       - docker push 550762782574.dkr.ecr.us-east-1.amazonaws.com/hoand33-ecr:latest
+      - echo push Success
