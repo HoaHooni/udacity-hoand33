@@ -48,11 +48,11 @@ spec:
             timeoutSeconds: 5
           envFrom:
             - configMapRef:
-                name: pro-properties
+                name: hoand-configmap
           env:
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: secret-pro-properties
+                  name: hoand-secret
                   key: DB_PASSWORD
       restartPolicy: Always
