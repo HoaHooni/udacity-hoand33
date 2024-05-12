@@ -14,5 +14,4 @@ ENV DB_HOST=127.0.0.1
 ENV DB_PORT=5432
 ENV DB_NAME=hoanddb
 EXPOSE 5153
-
 CMD [ "python", "./app.py" ]
